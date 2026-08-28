@@ -2,7 +2,7 @@
   const pageMap = {
     "index.html": "home",
     "": "home",
-    "leagues.html": "leagues",
+    "leagues.php": "leagues",
     "about.html": "about",
     "contact.html": "contact",
   };
