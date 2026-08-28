@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f2f4f7;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 520px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 24px 32px 32px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+    text-align: center;
+    color: #1c2733;
+    font-size: 1.6em;
+}
+
+form label {
+    display: block;
+    margin-top: 14px;
+    font-weight: bold;
+    color: #33404d;
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    box-sizing: border-box;
+    border: 1px solid #cbd2d9;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+fieldset {
+    margin-top: 18px;
+    border: 1px solid #e0e4e8;
+    border-radius: 4px;
+}
+
+legend {
+    font-weight: bold;
+    padding: 0 6px;
+}
+
+button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.05em;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+.alert {
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.alert-success {
+    background: #e6f7ec;
+    color: #1a7f3c;
+    border: 1px solid #b6e6c4;
+}
+
+.alert-error {
+    background: #fdecea;
+    color: #b3261e;
+    border: 1px solid #f6c6c2;
+}
+
+.alert-error ul {
+    margin: 0;
+    padding-left: 20px;
+}

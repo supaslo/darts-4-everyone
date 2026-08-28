@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Darts 4 Everyone logo placeholder">
+  <rect width="256" height="256" rx="32" fill="#13243b"/>
+  <circle cx="128" cy="128" r="78" fill="#f0a202"/>
+  <circle cx="128" cy="128" r="52" fill="#d62839"/>
+  <circle cx="128" cy="128" r="26" fill="#ffffff"/>
+  <path d="M186 64l18 18-56 56-18-18 56-56z" fill="#ffffff"/>
+  <text x="22" y="226" font-size="38" font-family="Verdana, sans-serif" fill="#ffffff">D4E</text>
+</svg>
