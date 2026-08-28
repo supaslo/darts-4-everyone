@@ -1,15 +1,18 @@
 (function () {
   const pageMap = {
-    "index.html": "home",
+    "index": "home",
     "": "home",
-    "leagues.php": "leagues",
-    "about.html": "about",
-    "contact.html": "contact",
+    "leagues": "leagues",
+    "about": "about",
+    "contact": "contact",
   };
 
   function resolvePageKey(pathname) {
-    const path = pathname.split("/").pop() || "index.html";
-    return pageMap[path] || "home";
+    // Strip any extension so this still matches if the host serves
+    // extension-less URLs (e.g. "/leagues" instead of "/leagues.php").
+    const file = pathname.split("/").pop() || "index";
+    const base = file.replace(/\.[^.]+$/, "");
+    return pageMap[base] || "home";
   }
 
   function hasRequiredContentSections(doc) {
