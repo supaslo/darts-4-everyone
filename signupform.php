@@ -5,7 +5,7 @@ require_once __DIR__ . '/config.php';
 
 $pdo = get_db();
 //$leagues = $pdo->query('SELECT id, name FROM leagues WHERE is_active = 1 ORDER BY name')->fetchAll();
-$leagues = $pdo->query('SELECT id, name FROM leagues WHERE is_active = 1 ORDER BY name ASC')->fetchAll();
+$leagues = $pdo->query('SELECT id, name FROM leagues WHERE is_active = 1  AND is_full = 0 ORDER BY name ASC')->fetchAll();
 // CSRF token for the form.
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));

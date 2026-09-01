@@ -59,6 +59,13 @@ if ($leagueId) {
     if (!$stmt->fetch()) {
         $errors[] = 'The selected league is not valid.';
     }
+    $league_count = $pdo->prepare('SELECT COUNT(id) FROM signups WHERE league_id = :id AND is_active = 1');
+    $league_count->execute(['id' => $leagueId]);
+    $count = (int) $league_count->fetchColumn();
+    if ($count >= 11) {
+        $update = $pdo->prepare('UPDATE leagues SET is_full = 1 WHERE id = :id');
+        $update->execute(['id' => $leagueId]);
+    }
 }
 
 if (!empty($errors)) {

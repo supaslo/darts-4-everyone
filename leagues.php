@@ -4,14 +4,7 @@ session_start();
 require_once __DIR__ . '/config.php';
 
 $pdo = get_db();
-$league_chosen = isset($_GET['league']) && !empty($_GET['league']);
-if ($league_chosen) {
-    $stmt = $pdo->prepare('SELECT id, name FROM leagues WHERE is_active = 1 AND id = :id ORDER BY name ASC');
-    $stmt->execute(['id' => (int) $_GET['league']]);
-    $leagues = $stmt->fetchAll();
-} else {
-    $leagues = $pdo->query('SELECT id, name FROM leagues WHERE is_active = 1 ORDER BY name ASC')->fetchAll();
-}
+$leagues = $pdo->query('SELECT id, name FROM leagues WHERE is_active = 1 ORDER BY name ASC')->fetchAll();
 // CSRF token for the form.
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
