@@ -4,7 +4,14 @@ session_start();
 require_once __DIR__ . '/config.php';
 
 $pdo = get_db();
-$leagues = $pdo->query('SELECT id, name FROM leagues WHERE is_active = 1 ORDER BY name')->fetchAll();
+$league_chosen = isset($_GET['league']) && !empty($_GET['league']);
+if ($league_chosen) {
+    $stmt = $pdo->prepare('SELECT id, name FROM leagues WHERE is_active = 1 AND id = :id ORDER BY name ASC');
+    $stmt->execute(['id' => (int) $_GET['league']]);
+    $leagues = $stmt->fetchAll();
+} else {
+    $leagues = $pdo->query('SELECT id, name FROM leagues WHERE is_active = 1 ORDER BY name ASC')->fetchAll();
+}
 // CSRF token for the form.
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -44,6 +51,7 @@ $success = isset($_GET['success']);
       <nav id="site-nav" class="site-nav" aria-label="Primary">
         <a href="index.html" data-page="home">Home</a>
         <a href="leagues.php" data-page="leagues">Leagues</a>
+        <a href="signupform.php" data-page="signupform">Sign Up</a>
         <a href="about.html" data-page="about">About</a>
         <a href="contact.html" data-page="contact">Contact Us</a>
       </nav>
@@ -57,64 +65,35 @@ $success = isset($_GET['success']);
         <p><a href="https://www.leagueleader.net/sharedreport.php?operatorid=1872&code=3453fc0d-4183-4aa6-8cb6-e59ed1cc1a96" target="_blank" rel="noopener noreferrer">072026 Schedule</a></p>
         <p><a href="https://www.leagueleader.net/sharedreport.php?operatorid=1872&code=b851d40b-671e-4211-8c09-7440550d1bbf" target="_blank" rel="noopener noreferrer">072026 Stats</a></p>
       </section>
-      <section class="section-header">
-        <p class="eyebrow">Sign-ups</p>
-        <h1>Sign up for upcoming leagues</h1>
-
-        <?php if ($success): ?>
+      <?php if ($success): ?>
+        <section>
           <p class="alert alert-success">Thanks! Your team has been signed up successfully.</p>
-        <?php endif; ?>
-
-        <?php if (!empty($errors)): ?>
-          <div class="alert alert-error">
-            <ul>
-                <?php foreach ($errors as $error): ?>
-                    <li><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></li>
-                <?php endforeach; ?>
-            </ul>
-          </div>
-        <?php endif; ?>
-
-        <form action="signup.php" method="post" novalidate>
-          <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') ?>">
-
-          <label for="league_id">League</label>
-          <select id="league_id" name="league_id" required>
-            <option value="">-- Select a league --</option>
+        </section>
+      <?php endif; ?>
+      <section class="content-grid" aria-label="Highlights">
+        <?php if (!empty($leagues)): ?>
             <?php foreach ($leagues as $league): ?>
-                <option value="<?= (int) $league['id'] ?>" <?= (isset($old['league_id']) && (int) $old['league_id'] === (int) $league['id']) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($league['name'], ENT_QUOTES, 'UTF-8') ?>
-                </option>
+              <article class="card">
+                <?php $teams = $pdo->query('SELECT team_name FROM signups WHERE league_id = ' . (int) $league['id'] . ' ORDER BY created_at DESC')->fetchAll(); ?>
+                <h2>
+                  <?= htmlspecialchars($league['name'], ENT_QUOTES, 'UTF-8') ?>
+                  <?php if (sizeof($teams) < 11): ?>
+                    <a href="signupform.php?league=<?= (int) $league['id'] ?>">Sign Up</a>
+                  <?php else: ?>
+                    <span style="color: red;">FULL</span>
+                  <?php endif; ?>
+                </h2>
+                <?php if (!empty($teams)): ?>
+                  <ul>
+                    <?php foreach ($teams as $team): ?>
+                      <li><?= htmlspecialchars($team['team_name'], ENT_QUOTES, 'UTF-8') ?></li>
+                    <?php endforeach; ?>
+                  </ul>
+                <?php endif; ?>
+                
+              </article>
             <?php endforeach; ?>
-          </select>
-        
-          <label for="team_name">Team Name</label>
-          <input type="text" id="team_name" name="team_name" maxlength="100" required
-               value="<?= htmlspecialchars($old['team_name'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-
-          <label for="captain_name">Captain's Name</label>
-          <input type="text" id="captain_name" name="captain_name" maxlength="100" required
-               value="<?= htmlspecialchars($old['captain_name'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-
-          <label for="captain_phone">Captain's Phone Number</label>
-          <input type="tel" id="captain_phone" name="captain_phone" maxlength="20" required
-               value="<?= htmlspecialchars($old['captain_phone'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-
-          <label for="captain_email">Captain's Email Address</label>
-          <input type="email" id="captain_email" name="captain_email" maxlength="150" required
-               value="<?= htmlspecialchars($old['captain_email'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-
-          <fieldset>
-            <legend>Partners (optional, up to 3)</legend>
-            <?php for ($i = 1; $i <= 3; $i++): ?>
-                <label for="partner<?= $i ?>_name">Partner <?= $i ?> Name</label>
-                <input type="text" id="partner<?= $i ?>_name" name="partner<?= $i ?>_name" maxlength="100"
-                       value="<?= htmlspecialchars($old["partner{$i}_name"] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-            <?php endfor; ?>
-          </fieldset>
-
-          <button type="submit">Sign Up</button>
-        </form>
+        <?php endif; ?>
       </section>
     </main>
 

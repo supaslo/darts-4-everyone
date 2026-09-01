@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 $db = require '/home/u941905604/domains/darts4everyone.com/db_config.php';
+//$db = require './config/db_config.php';
 
 function get_db(): PDO
 {
