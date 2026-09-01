@@ -4,7 +4,7 @@ session_start();
 require_once __DIR__ . '/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: leagues.php');
+    header('Location: signupform.php');
     exit;
 }
 
@@ -13,7 +13,7 @@ function back_with_errors(array $errors, array $old): void
     $_SESSION['form_errors'] = $errors;
     unset($old['csrf_token']);
     $_SESSION['form_old'] = $old;
-    header('Location: leagues.php');
+    header('Location: signupform.php');
     exit;
 }
 
@@ -58,6 +58,13 @@ if ($leagueId) {
     $stmt->execute(['id' => $leagueId]);
     if (!$stmt->fetch()) {
         $errors[] = 'The selected league is not valid.';
+    }
+    $league_count = $pdo->prepare('SELECT COUNT(id) FROM signups WHERE league_id = :id AND is_active = 1');
+    $league_count->execute(['id' => $leagueId]);
+    $count = (int) $league_count->fetchColumn();
+    if ($count >= 11) {
+        $update = $pdo->prepare('UPDATE leagues SET is_full = 1 WHERE id = :id');
+        $update->execute(['id' => $leagueId]);
     }
 }
 
