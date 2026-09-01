@@ -3,6 +3,9 @@
     "index": "home",
     "": "home",
     "leagues": "leagues",
+    "signup": "signupform",
+    "signupform": "signupform",
+    "signup-form": "signupform",
     "about": "about",
     "contact": "contact",
   };
@@ -10,8 +13,9 @@
   function resolvePageKey(pathname) {
     // Strip any extension so this still matches if the host serves
     // extension-less URLs (e.g. "/leagues" instead of "/leagues.php").
-    const file = pathname.split("/").pop() || "index";
-    const base = file.replace(/\.[^.]+$/, "");
+    const cleanPath = (pathname || "").split("?")[0].replace(/\/+$/, "");
+    const file = cleanPath.split("/").pop() || "index";
+    const base = file.replace(/\.[^.]+$/, "").toLowerCase();
     return pageMap[base] || "home";
   }
 

@@ -4,7 +4,7 @@ session_start();
 require_once __DIR__ . '/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: leagues.php');
+    header('Location: signupform.php');
     exit;
 }
 
@@ -13,7 +13,7 @@ function back_with_errors(array $errors, array $old): void
     $_SESSION['form_errors'] = $errors;
     unset($old['csrf_token']);
     $_SESSION['form_old'] = $old;
-    header('Location: leagues.php');
+    header('Location: signupform.php');
     exit;
 }
 
