@@ -76,6 +76,7 @@ $success = isset($_GET['success']);
                     <span style="color: red;">FULL</span>
                   <?php endif; ?>
                 </h2>
+                <h3>Signed up Teams:</h3>
                 <?php if (!empty($teams)): ?>
                   <ul>
                     <?php foreach ($teams as $team): ?>
