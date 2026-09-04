@@ -80,7 +80,7 @@ $selectedLeague = (int) ($old['league_id'] ?? ($_GET['league'] ?? 0));
           <input type="text" id="team_name" name="team_name" maxlength="100" required
                value="<?= htmlspecialchars($old['team_name'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
 
-          <label for="captain_name">Captain's Name</label>
+          <label for="captain_name">Captain's Name (Partner 1)</label>
           <input type="text" id="captain_name" name="captain_name" maxlength="100" required
                value="<?= htmlspecialchars($old['captain_name'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
 
@@ -94,7 +94,7 @@ $selectedLeague = (int) ($old['league_id'] ?? ($_GET['league'] ?? 0));
 
           <fieldset>
             <legend>Partners (optional, up to 3)</legend>
-            <?php for ($i = 1; $i <= 3; $i++): ?>
+            <?php for ($i = 2; $i <= 4; $i++): ?>
                 <label for="partner<?= $i ?>_name">Partner <?= $i ?> Name</label>
                 <input type="text" id="partner<?= $i ?>_name" name="partner<?= $i ?>_name" maxlength="100"
                        value="<?= htmlspecialchars($old["partner{$i}_name"] ?? '', ENT_QUOTES, 'UTF-8') ?>">
