@@ -68,7 +68,7 @@ $success = isset($_GET['success']);
         <?php if (!empty($leagues)): ?>
             <?php foreach ($leagues as $league): ?>
               <article class="card">
-                <?php $teams = $pdo->query('SELECT team_name FROM signups WHERE league_id = ' . (int) $league['id'] . ' ORDER BY created_at DESC')->fetchAll(); ?>
+                <?php $teams = $pdo->query('SELECT team_name, captain_name FROM signups WHERE league_id = ' . (int) $league['id'] . ' ORDER BY created_at DESC')->fetchAll(); ?>
                 <h2>
                   <?= htmlspecialchars($league['name'], ENT_QUOTES, 'UTF-8') ?>
                   <?php if (sizeof($teams) < 11): ?>
@@ -78,14 +78,13 @@ $success = isset($_GET['success']);
                   <?php endif; ?>
                 </h2>
                 <h3>Signed up Teams:</h3>
-                <?php if (!empty($teams)): ?>
-                  <ul>
-                    <?php foreach ($teams as $team): ?>
-                      <li><?= htmlspecialchars($team['team_name'], ENT_QUOTES, 'UTF-8') ?></li>
-                    <?php endforeach; ?>
-                  </ul>
-                <?php endif; ?>
-                
+                <?php foreach ($teams as $team): ?>
+                  <?php if ($team.team_name === NULL || $team.team_name === ''): ?>
+                    <li><?= htmlspecialchars($team['captain_name'], ENT_QUOTES, 'UTF-8') ?></li>
+                  <?php else: ?>
+                    <li><?= htmlspecialchars($team['team_name'], ENT_QUOTES, 'UTF-8') ?></li>
+                  <?php endif; ?>
+                <?php endforeach; ?>
               </article>
             <?php endforeach; ?>
         <?php endif; ?>
