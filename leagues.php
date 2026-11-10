@@ -55,9 +55,9 @@ $success = isset($_GET['success']);
         <p class="eyebrow">Stats</p>
         <h1>Schedule and stats in one place</h1>
         <p>Pick a league to view the current match schedule and player/team stats.</p>
-        <p><a href="https://www.leagueleader.net/sharedreport.php?operatorid=1872&code=b851d40b-671e-4211-8c09-7440550d1bbf" target="_blank" rel="noopener noreferrer">072026 Stats</a></p>
-        <p><a href="https://www.leagueleader.net/sharedreport.php?operatorid=1872&code=af01d6b4-2ac7-4bd1-beac-8374c47f69f3" target="_blank" rel="noopener noreferrer">PP0926 Schedule</a>***New***</p>
-        <p><a href="https://www.leagueleader.net/sharedreport.php?operatorid=1872&code=641eb81d-52a7-4ca2-9f79-bb34bb0d6d44" target="_blank" rel="noopener noreferrer">PP0926 Stats</a>***New***</p>
+        <!--<p><a href="https://www.leagueleader.net/sharedreport.php?operatorid=1872&code=b851d40b-671e-4211-8c09-7440550d1bbf" target="_blank" rel="noopener noreferrer">072026 Stats</a></p>-->
+        <p><a href="https://www.leagueleader.net/sharedreport.php?operatorid=1872&code=af01d6b4-2ac7-4bd1-beac-8374c47f69f3" target="_blank" rel="noopener noreferrer">PP0926 Park Pub Tuesday Doubles Schedule</a></p>
+        <p><a href="https://www.leagueleader.net/sharedreport.php?operatorid=1872&code=641eb81d-52a7-4ca2-9f79-bb34bb0d6d44" target="_blank" rel="noopener noreferrer">PP0926 Park Pub Tuesday Doubles Stats</a></p>
       </section>
       <?php if ($success): ?>
         <section>
