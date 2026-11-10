@@ -80,20 +80,20 @@ $selectedLeague = (int) ($old['league_id'] ?? ($_GET['league'] ?? 0));
           <input type="text" id="team_name" name="team_name" maxlength="100" required
                value="<?= htmlspecialchars($old['team_name'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
 
-          <label for="captain_name">Captain's Name (Partner 1)</label>
+          <label for="captain_name">Player 1 Name (Captain)</label>
           <input type="text" id="captain_name" name="captain_name" maxlength="100" required
                value="<?= htmlspecialchars($old['captain_name'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
 
-          <label for="captain_phone">Captain's Phone Number</label>
+          <label for="captain_phone">Player 1 Phone Number</label>
           <input type="tel" id="captain_phone" name="captain_phone" maxlength="20" required
                value="<?= htmlspecialchars($old['captain_phone'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
 
-          <label for="captain_email">Captain's Email Address</label>
+          <label for="captain_email">Player 1 Email Address</label>
           <input type="email" id="captain_email" name="captain_email" maxlength="150" required
                value="<?= htmlspecialchars($old['captain_email'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
 
           <fieldset>
-            <legend>Partners (optional, up to 3)</legend>
+            <legend>Additional Players (optional, up to 3 *IF PLAYING SINGLES ONLY LIST SUBS HERE)</legend>
             <?php for ($i = 2; $i <= 4; $i++): ?>
                 <label for="partner<?= $i ?>_name">Partner <?= $i ?> Name</label>
                 <input type="text" id="partner<?= $i ?>_name" name="partner<?= $i ?>_name" maxlength="100"
