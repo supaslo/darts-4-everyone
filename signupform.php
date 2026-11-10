@@ -77,7 +77,7 @@ $selectedLeague = (int) ($old['league_id'] ?? ($_GET['league'] ?? 0));
           </select>
         
           <label for="team_name">Team Name</label>
-          <input type="text" id="team_name" name="team_name" maxlength="100" required
+          <input type="text" id="team_name" name="team_name" maxlength="100"
                value="<?= htmlspecialchars($old['team_name'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
 
           <label for="captain_name">Player 1 Name (Captain)</label>
