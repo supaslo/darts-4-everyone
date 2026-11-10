@@ -38,9 +38,6 @@ for ($i = 1; $i <= 3; $i++) {
 if (!$leagueId) {
     $errors[] = 'Please select a league.';
 }
-if ($teamName === '') {
-    $errors[] = 'Team name is required.';
-}
 if ($captainName === '') {
     $errors[] = "Captain's name is required.";
 }
