@@ -79,7 +79,7 @@ $success = isset($_GET['success']);
                 </h2>
                 <h3>Signed up Teams:</h3>
                 <?php foreach ($teams as $team): ?>
-                  <?php if ($team.team_name === NULL || $team.team_name === ''): ?>
+                  <?php if ($team[team_name] === NULL || $team[team_name] === ''): ?>
                     <li><?= htmlspecialchars($team['captain_name'], ENT_QUOTES, 'UTF-8') ?></li>
                   <?php else: ?>
                     <li><?= htmlspecialchars($team['team_name'], ENT_QUOTES, 'UTF-8') ?></li>
